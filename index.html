@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Ares</title>
+    <link href="./css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/sanitize.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/jquery-3.7.1.min.js"></script>
@@ -21,6 +22,9 @@
 <main>
 
     <div class="box">
+        <div class="center">
+            <div class="box-title">Tools</div>
+        </div>
         <div class="content">
             <div class="content-inner">
                 <div class="center">
@@ -33,12 +37,16 @@
 
     <!-- TR -->
     <div class="box">
+        <div class="center">
+            <div class="box-title">Board</div>
+        </div>
         <div class="content-single">
             <div class="content-inner">
                 <div class="center">
-                    <a href="javascript:void(0)" class="content-button" id="tr-m">-</a>
-                    <div class="content-text" id="tr-v">0</div>
-                    <a href="javascript:void(0)" class="content-button" id="tr-p">+</a>
+                    <div class="icon"></div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="tr-m"></a>
+                    <div class="content-text content-text-num" id="tr-v">0</div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="tr-p"></a>
                 </div>
             </div>
         </div>
@@ -47,51 +55,55 @@
     <!-- Productions -->
     <div class="box">
         <div class="center">
-            Productions
+            <div class="box-title">Productions</div>
         </div>
         <div class="row">
-            <div class="content-double">
+            <div class="content-double line-mc">
                 <div class="content-inner">
                     <div class="row">
                         <div class="center">
-                            <a href="javascript:void(0)" class="content-button" id="pMc-m">-</a>
-                            <div class="content-text" id="pMc-v">0</div>
-                            <a href="javascript:void(0)" class="content-button" id="pMc-p">+</a>
+                            <div class="icon"></div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="pMc-m"></a>
+                            <div class="content-text content-text-num" id="pMc-v">0</div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="pMc-p"></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="content-double">
+            <div class="content-double line-card">
                 <div class="content-inner">
                     <div class="row">
                         <div class="center">
-                            <a href="javascript:void(0)" class="content-button" id="pCard-m">-</a>
-                            <div class="content-text" id="pCard-v">0</div>
-                            <a href="javascript:void(0)" class="content-button" id="pCard-p">+</a>
+                            <div class="icon"></div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="pCard-m"></a>
+                            <div class="content-text content-text-num" id="pCard-v">0</div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="pCard-p"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="content-double">
+            <div class="content-double line-heat">
                 <div class="content-inner">
                     <div class="row">
                         <div class="center">
-                            <a href="javascript:void(0)" class="content-button" id="pHeat-m">-</a>
-                            <div class="content-text" id="pHeat-v">0</div>
-                            <a href="javascript:void(0)" class="content-button" id="pHeat-p">+</a>
+                            <div class="icon"></div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="pHeat-m"></a>
+                            <div class="content-text content-text-num" id="pHeat-v">0</div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="pHeat-p"></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="content-double">
+            <div class="content-double line-plant">
                 <div class="content-inner">
                     <div class="row">
                         <div class="center">
-                            <a href="javascript:void(0)" class="content-button" id="pPlant-m">-</a>
-                            <div class="content-text" id="pPlant-v">0</div>
-                            <a href="javascript:void(0)" class="content-button" id="pPlant-p">+</a>
+                            <div class="icon"></div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="pPlant-m"></a>
+                            <div class="content-text content-text-num" id="pPlant-v">0</div>
+                            <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="pPlant-p"></a>
                         </div>
                     </div>
                 </div>
@@ -102,60 +114,65 @@
     <!-- Resources -->
     <div class="box">
         <div class="center">
-            Resources
+            <div class="box-title">Resources</div>
         </div>
-        <div class="content-single">
+        <div class="content-single line-mc">
             <div class="content-inner">
                 <div class="center">
-                    <a href="javascript:void(0)" class="content-button" id="rMc-mm">--</a>
-                    <a href="javascript:void(0)" class="content-button" id="rMc-m">-</a>
-                    <div class="content-text" id="rMc-v">0</div>
-                    <a href="javascript:void(0)" class="content-button" id="rMc-p">+</a>
-                    <a href="javascript:void(0)" class="content-button" id="rMc-pp">++</a>
+                    <div class="icon"></div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-left content-button" id="rMc-mm"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="rMc-m"></a>
+                    <div class="content-text content-text-num" id="rMc-v">0</div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="rMc-p"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-right content-button" id="rMc-pp"></a>
                 </div>
             </div>
         </div>
-        <div class="content-single">
+        <div class="content-single line-heat">
             <div class="content-inner">
                 <div class="center">
-                    <a href="javascript:void(0)" class="content-button" id="rHeat-mm">--</a>
-                    <a href="javascript:void(0)" class="content-button" id="rHeat-m">-</a>
-                    <div class="content-text" id="rHeat-v">0</div>
-                    <a href="javascript:void(0)" class="content-button" id="rHeat-p">+</a>
-                    <a href="javascript:void(0)" class="content-button" id="rHeat-pp">++</a>
+                    <div class="icon"></div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-left content-button" id="rHeat-mm"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="rHeat-m"></a>
+                    <div class="content-text content-text-num" id="rHeat-v">0</div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="rHeat-p"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-right content-button" id="rHeat-pp"></a>
                 </div>
             </div>
         </div>
-        <div class="content-single">
+        <div class="content-single line-plant">
             <div class="content-inner">
                 <div class="center">
-                    <a href="javascript:void(0)" class="content-button" id="rPlant-mm">--</a>
-                    <a href="javascript:void(0)" class="content-button" id="rPlant-m">-</a>
-                    <div class="content-text" id="rPlant-v">0</div>
-                    <a href="javascript:void(0)" class="content-button" id="rPlant-p">+</a>
-                    <a href="javascript:void(0)" class="content-button" id="rPlant-pp">++</a>
+                    <div class="icon"></div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-left content-button" id="rPlant-mm"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="rPlant-m"></a>
+                    <div class="content-text content-text-num" id="rPlant-v">0</div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="rPlant-p"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-right content-button" id="rPlant-pp"></a>
                 </div>
             </div>
         </div>
-        <div class="content-single">
+        <div class="content-single line-steel">
             <div class="content-inner">
                 <div class="center">
-                    <a href="javascript:void(0)" class="content-button" id="rSteel-mm">--</a>
-                    <a href="javascript:void(0)" class="content-button" id="rSteel-m">-</a>
-                    <div class="content-text" id="rSteel-v">0</div>
-                    <a href="javascript:void(0)" class="content-button" id="rSteel-p">+</a>
-                    <a href="javascript:void(0)" class="content-button" id="rSteel-pp">++</a>
+                    <div class="icon"></div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-left content-button" id="rSteel-mm"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="rSteel-m"></a>
+                    <div class="content-text content-text-num" id="rSteel-v">0</div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="rSteel-p"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-right content-button" id="rSteel-pp"></a>
                 </div>
             </div>
         </div>
-        <div class="content-single">
+        <div class="content-single line-titanium">
             <div class="content-inner">
                 <div class="center">
-                    <a href="javascript:void(0)" class="content-button" id="rTitanium-mm">--</a>
-                    <a href="javascript:void(0)" class="content-button" id="rTitanium-m">-</a>
-                    <div class="content-text" id="rTitanium-v">0</div>
-                    <a href="javascript:void(0)" class="content-button" id="rTitanium-p">+</a>
-                    <a href="javascript:void(0)" class="content-button" id="rTitanium-pp">++</a>
+                    <div class="icon"></div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-left content-button" id="rTitanium-mm"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-left content-button" id="rTitanium-m"></a>
+                    <div class="content-text content-text-num" id="rTitanium-v">0</div>
+                    <a href="javascript:void(0)" class="fa-solid fa-angle-right content-button" id="rTitanium-p"></a>
+                    <a href="javascript:void(0)" class="fa-solid fa-angles-right content-button" id="rTitanium-pp"></a>
                 </div>
             </div>
         </div>

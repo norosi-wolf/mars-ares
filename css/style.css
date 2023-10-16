@@ -1,28 +1,40 @@
+@font-face {
+	font-family: 'M PLUS Rounded 1c';
+	src: url(../webfonts/MPLUSRounded1c-Regular.ttf);
+}
 
 .display-none {
     display:none;
 }
 
+html {
+    overflow:scroll;
+    overflow-x: hidden;
+}
+
 body {
-    font-family: "RocknRoll One" ;
-    font-size: 40px;
+    font-family: "M PLUS Rounded 1c" ;
+    font-size: 15vw;
+    background-color: #DDDDDD;
+    height: auto;
+    overflow-x: hidden;
+    user-select: none;
 }
 
 main {
-    padding: 1%;
     position: absolute;
     left: 50%;
     margin-top: 1%;
     margin-right: -50%;
     transform: translateX(-50%);
-    width: 90%;
-    height: 90%;
+    width: 95vw;
+    height: auto;
 }
 
 .box {
-    width: 100%;
+    width: 95vw;
     height: auto;
-    padding-bottom: 2%;
+    margin-bottom: 7vw;
 }
 
 .row {
@@ -42,42 +54,50 @@ main {
 }
 
 .content-single {
-    width: 100%;
+    width: 95%;
     height: auto;
-    background-color: aqua;
+    background-color: white;
     padding: 1%;
     
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    margin-bottom: 2vw;
+    
+    box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, .2);
 }
 
 .content-double {
-    width: 50%;
+    width: 46vw;
     height: auto;
-    background-color: aqua;
+    background-color: white;
     padding: 1%;
     
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1vw;
+    margin-right: 1vw;
+
+    margin-bottom: 2vw;
+
+    box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, .2);
 }
 
 .content {
     width: 100%;
     height: auto;
     padding: 1%;
-    background-color: aqua;
+    background-color: white;
 
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    
+    box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, .2);
 }
 
 .content-inner {
     width: 100%;
     height: 100%;
-    background-color:brown;
+    background-color:white;
 }
 
 .content-button {
@@ -87,9 +107,10 @@ main {
     text-decoration: none;
     margin: 2% 0;
     display: inline-block;
-    width: 10vh;
-    height: 10vh;
-    font-size: 5vh;
+    width: 8vw;
+    height: 8vw;
+    font-size: 5vw;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,30 +119,95 @@ main {
     margin-right: 1%;
 }
 .content-button:active {
-    background: red;
-    color: #FFF;
+	color: #fff;
+	background: pink;
 }
 
 .content-event-button {
-    border-radius: 10%;
-    background: #6fa1ff;
-    color: #FFF;
-    text-decoration: none;
-    display: inline-block;
-    padding: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	width: 50vw;
+	margin: auto;
+	padding: 2vw 8vw;
+	font-weight: bold;
+	border: 0.5vw solid #27acd9;
+	color: #27acd9;
+	border-radius: 100vw;
+	transition: 0.5s;
+    font-size: 5vw;
+    margin-left: 2vw;
+}
 
+.content-event-button:active  {
+	color: #fff;
+	background: #27acd9;
 }
-.content-event-button:active {
-    background: red;
-    color: #FFF;
-}
+
 
 .content-text {
     display: inline-block;
-    font-size: 80%;
+    font-size: 7vw;
     padding-left: 5%;
     padding-right: 5%;
 }
 
+.box-title {
+	font-size:7vw;
+	text-align:center;
+	line-height:7vw;
+	font-weight:bold;
+	color: transparent;
+	background : rgba(0,0,0,1);
+	text-shadow : 
+		0 0 1vw rgba(255,255,255,0.05),
+		0.1vw 0.4vw 0.3vw rgba(255,255,255,0.4);
+	-webkit-background-clip : text;
+    margin-bottom: 2vw;
+    font-weight: bold;
+}
+
+.line-mc {
+    border-left: 2vw solid yellow;
+}
+
+.line-card {
+    border-left: 2vw solid blue;
+}
+
+.line-heat {
+    border-left: 2vw solid orangered;
+}
+
+.line-plant {
+    border-left: 2vw solid green;
+}
+
+.line-steel {
+    border-left: 2vw solid brown;
+}
+
+.line-titanium {
+    border-left: 2vw solid #999999;
+}
+
+.icon {
+    width: 8vw;
+    height: 8vw;
+    background-color: greenyellow;
+    margin-right: 1vw;
+    margin-left: 1vw;
+}
+
+.content-text-num {
+    width: 15vw;
+}
+
+.content-single .content-text-num {
+    width: 24vw;
+}
+
+.content-single .icon {
+    width: 10vw;
+    height: 10vw;
+}

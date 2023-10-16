@@ -68,7 +68,7 @@ function updateValue(id, addValue)
 
     if (v != UserDatas[id])
     {
-        UndoDatas.unshift([{id: id, value: v - UserDatas[id]}]);
+        addUndo([{id: id, value: v - UserDatas[id]}]);
         UserDatas[id] = v;
         $(`#${id}-v`).text(UserDatas[id]);
     }
@@ -112,7 +112,7 @@ function generate()
         $(`#rHeat-v`).text(UserDatas.rHeat);
     }    
 
-    UndoDatas.unshift(undoData);
+    addUndo(undoData);
 };
 
 function undo()
@@ -130,3 +130,12 @@ function undo()
         }
     }
 };
+
+function addUndo(data)
+{
+    UndoDatas.unshift(data);
+    if (10 < UndoDatas.length)
+    {
+        UndoDatas.pop();
+    }
+}
