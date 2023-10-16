@@ -200,11 +200,12 @@ main {
 }
 
 .icon {
-    width: 8vw;
-    height: 8vw;
-    background-color: greenyellow;
+    width: 9vw;
+    height: 9vw;
     margin-right: 1vw;
     margin-left: 1vw;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .content-text-num {
@@ -218,4 +219,32 @@ main {
 .content-single .icon {
     width: 10vw;
     height: 10vw;
+}
+
+.icon-mc {
+    background-image: url('../img/mc.png');
+}
+
+.icon-heat {
+    background-image: url('../img/heat.png');
+}
+
+.icon-plant {
+    background-image: url('../img/plant.png');
+}
+
+.icon-steel {
+    background-image: url('../img/steel.png');
+}
+
+.icon-titanium {
+    background-image: url('../img/titanium.png');
+}
+
+.icon-tr {
+    background-image: url('../img/tr.png');
+}
+
+.icon-card {
+    background-image: url('../img/card.png');
 }
