@@ -115,8 +115,8 @@ main {
     text-decoration: none;
     margin: 2% 0;
     display: inline-block;
-    width: 8vw;
-    height: 8vw;
+    width: 10vw;
+    height: 10vw;
     font-size: 5vw;
     font-weight: bold;
     display: flex;
@@ -136,15 +136,15 @@ main {
 	display: block;
 	text-align: center;
 	text-decoration: none;
-	width: 30vw;
+	width: 40vw;
 	margin: 0 auto;
-	padding: 1vw 1vw;
+	padding: 0vw 1vw;
 	font-weight: bold;
 	border: 0.5vw solid #27acd9;
 	color: #27acd9;
 	border-radius: 100vw;
 	transition: 0.5s;
-    font-size: 5vw;
+    font-size: 1vw;
 }
 
 .content-event-button:active  {
@@ -163,7 +163,7 @@ main {
 .box-title {
 	font-size:7vw;
 	text-align:center;
-	line-height:7vw;
+	line-height:8vw;
 	font-weight:bold;
 	color: transparent;
 	background : rgba(0,0,0,1);
@@ -192,11 +192,15 @@ main {
 }
 
 .line-steel {
-    border-left: 2vw solid brown;
+    border-left: 2vw solid #663300;
 }
 
 .line-titanium {
-    border-left: 2vw solid #999999;
+    border-left: 2vw solid #444444;
+}
+
+.line-tr {
+    border-left: 2vw solid #996666;
 }
 
 .icon {
