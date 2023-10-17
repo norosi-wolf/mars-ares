@@ -1,0 +1,10 @@
+{
+	"name": "Ares Expedition Solo Tool",
+	"short_name": "AEST",
+	"description": "Ares Expedition Solo Tool",
+	"icons": [],
+	"start_url": "./index.html",
+	"display": "standalone",
+	"theme_color": "#b0c4de",
+	"background_color": "#696969"
+}
