@@ -6,9 +6,9 @@ var CACHE_NAME = 'pwa-aest-caches';
 var urlsToCache = [
     './',
     './index.html',
+    './sw.js',
     './js/app.js',
     './js/jquery-3.7.1.min.js',
-    './js/sw.js',
     './css/all.min.css',
     './css/sanitize.css',
     './css/style.css',
