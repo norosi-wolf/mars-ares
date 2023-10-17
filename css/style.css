@@ -17,8 +17,16 @@ body {
     font-size: 15vw;
     background-color: #DDDDDD;
     height: auto;
-    overflow-x: hidden;
     user-select: none;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+body::-webkit-scrollbar{
+    display:none;
 }
 
 main {
@@ -107,13 +115,14 @@ main {
     text-decoration: none;
     margin: 2% 0;
     display: inline-block;
-    width: 8vw;
-    height: 8vw;
+    width: 10vw;
+    height: 10vw;
     font-size: 5vw;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
+	transition: 0.5s;
     
     margin-left: 1%;
     margin-right: 1%;
@@ -127,16 +136,15 @@ main {
 	display: block;
 	text-align: center;
 	text-decoration: none;
-	width: 50vw;
-	margin: auto;
-	padding: 2vw 8vw;
+	width: 40vw;
+	margin: 0 auto;
+	padding: 0vw 1vw;
 	font-weight: bold;
 	border: 0.5vw solid #27acd9;
 	color: #27acd9;
 	border-radius: 100vw;
 	transition: 0.5s;
     font-size: 5vw;
-    margin-left: 2vw;
 }
 
 .content-event-button:active  {
@@ -155,7 +163,7 @@ main {
 .box-title {
 	font-size:7vw;
 	text-align:center;
-	line-height:7vw;
+	line-height:8vw;
 	font-weight:bold;
 	color: transparent;
 	background : rgba(0,0,0,1);
@@ -184,19 +192,24 @@ main {
 }
 
 .line-steel {
-    border-left: 2vw solid brown;
+    border-left: 2vw solid #663300;
 }
 
 .line-titanium {
-    border-left: 2vw solid #999999;
+    border-left: 2vw solid #444444;
+}
+
+.line-tr {
+    border-left: 2vw solid #996666;
 }
 
 .icon {
-    width: 8vw;
-    height: 8vw;
-    background-color: greenyellow;
+    width: 9vw;
+    height: 9vw;
     margin-right: 1vw;
     margin-left: 1vw;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .content-text-num {
@@ -210,4 +223,33 @@ main {
 .content-single .icon {
     width: 10vw;
     height: 10vw;
+}
+
+.icon-mc {
+    background-image: url('../img/mc.png');
+}
+
+.icon-heat {
+    background-image: url('../img/heat.png');
+}
+
+.icon-plant {
+    background-image: url('../img/plant.png');
+}
+
+.icon-steel {
+    background-image: url('../img/steel.png');
+}
+
+.icon-titanium {
+    background-image: url('../img/titanium.png');
+}
+
+.icon-tr {
+    background-image: url('../img/tr.png');
+    width: 30vw;
+}
+
+.icon-card {
+    background-image: url('../img/card.png');
 }
