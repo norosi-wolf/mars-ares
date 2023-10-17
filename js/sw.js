@@ -2,7 +2,7 @@
 // ServiceWorker処理：https://developers.google.com/web/fundamentals/primers/service-workers/?hl=ja
 
 // キャッシュ名とキャッシュファイルの指定
-var CACHE_NAME = 'pwa-aest-caches';
+var CACHE_NAME = 'pwa-aest-caches ver1.0.0';
 var urlsToCache = [
     '../mars-ares/',
     '../mars-ares/index.html',
