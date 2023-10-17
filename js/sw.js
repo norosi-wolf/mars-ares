@@ -4,11 +4,12 @@
 // キャッシュ名とキャッシュファイルの指定
 var CACHE_NAME = 'pwa-aest-caches';
 var urlsToCache = [
-    './',
-    './index.html',
-    './js/',
-    './css/',
-    './img/',
+    '../',
+    '../index.html',
+    '../js/',
+    '../css/',
+    '../img/',
+    '../webfonts/',
 //    './js/sw.js',
 //    './js/app.js',
 //    './js/jquery-3.7.1.min.js',
