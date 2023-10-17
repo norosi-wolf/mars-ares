@@ -18,6 +18,11 @@ var UserDatas = {
 
 var UndoDatas = [];
 
+var CpuPhase = {
+    current: 0,
+    deck: [],
+};
+
 
 function initialize()
 {
@@ -56,6 +61,20 @@ function initialize()
     $('#rTitanium-m').click(function(){updateValue("rTitanium", -1);});
     $('#rTitanium-p').click(function(){updateValue("rTitanium", 1);});
     $('#rTitanium-pp').click(function(){updateValue("rTitanium", 10);});
+
+    $('.phase0').show();
+    $('.phase1').hide();
+    $('.phase2').hide();
+    $('.phase3').hide();
+    $('.phase4').hide();
+    $('.phase5').hide();
+    
+    $('.phase0').click(function(){nextCpuPhase();});
+    $('.phase1').click(function(){nextCpuPhase();});
+    $('.phase2').click(function(){nextCpuPhase();});
+    $('.phase3').click(function(){nextCpuPhase();});
+    $('.phase4').click(function(){nextCpuPhase();});
+    $('.phase5').click(function(){nextCpuPhase();});
 };
 
 function updateValue(id, addValue)
@@ -138,4 +157,51 @@ function addUndo(data)
     {
         UndoDatas.pop();
     }
-}
+};
+
+
+function nextCpuPhase()
+{
+    if (CpuPhase.current == 0)
+    {
+        CpuPhase.deck = shuffleArray([1,2,3,4,5]);
+        CpuPhase.current = CpuPhase.deck.shift();
+    }
+    else if (0 < CpuPhase.deck.length)
+    {
+        CpuPhase.current = CpuPhase.deck.shift();
+    }
+    else
+    {
+        CpuPhase.current = 0;
+    }
+    
+    updateCpuPhase(CpuPhase.current);
+};
+
+function updateCpuPhase(phase)
+{
+    for (let i = 0; i <= 5; i++)
+    {
+        if (phase == i)
+        {
+            $(`.phase${i}`).show();
+        }
+        else
+        {
+            $(`.phase${i}`).hide();
+        }
+    }
+};
+
+
+function shuffleArray(array)
+{
+    let k;
+    for (let i = array.length; 1 < i; i--)
+    {
+        k = Math.floor(Math.random() * i);
+        [array[k], array[i - 1]] = [array[i - 1], array[k]];
+    }
+    return array;
+};
