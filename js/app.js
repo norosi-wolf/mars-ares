@@ -162,21 +162,20 @@ function resetValues()
     //
     let tileSeaList = $('.tile-sea');
     let tmpAry = [];
-    for (let i = 0; i < tileSeaList.length; i++)
+    let i = 0;
+    for (i = 0; i < tileSeaList.length; i++)
     {
+        if ($(tileSeaList[i]).hasClass('tile-sea-o')) $(tileSeaList[i]).removeClass('tile-sea-o');
+        if ($(tileSeaList[i]).hasClass('tile-sea-c') == false) $(tileSeaList[i]).addClass('tile-sea-c');
+        $(tileSeaList[i]).find('.tile-on').hide();
+        $(tileSeaList[i]).find('.tile-off').show();
         tmpAry.push($(tileSeaList[i]).html());
     }
-    tmpAry = shuffleArray(tmpAry);
 
-    let tile;
-    for (let i = 0; i < tmpAry.length; i++)
+    tmpAry = shuffleArray(tmpAry);
+    for (i = 0; i < tmpAry.length; i++)
     {
-        tile = $(tileSeaList[i]);
-        tile.removeClass('tile-sea-o');
-        tile.addClass('tile-sea-c');
-        tile.find('.tile-on').hide();
-        tile.find('.tile-off').show();
-        $(`#tile-sea${i}`).html(tmpAry[i]);
+        $(`#tile-sea${i+1}`).html(tmpAry[i]);
     }
 };
 
@@ -316,7 +315,6 @@ function openTileSea(id)
         p.find('.tile-off').show();
     }
 };
-
 
 function shuffleArray(array)
 {
