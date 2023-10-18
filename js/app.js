@@ -1,7 +1,12 @@
 
+const TEMPERATURE_LIST = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8];
+const OXYGEN_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
 var UserDatas = {
     // Board
     tr: 0,
+    oxygen: 0,
+    temperature: 0,
     // Productions
     pMc: 0,
     pCard: 0,
@@ -13,7 +18,7 @@ var UserDatas = {
     rPlant: 0,
     rSteel: 0,
     rTitanium: 0,
-
+    rForest: 0,
 };
 
 var UndoDatas = [];
@@ -26,11 +31,18 @@ var CpuPhase = {
 
 function initialize()
 {
+    resetValues();
+
     $('#generate').click(function(){generate();});
     $('#undo').click(function(){undo();});
 
     $('#tr-m').click(function(){updateValue("tr", -1);});
     $('#tr-p').click(function(){updateValue("tr", 1);});
+
+    $('#oxygen-m').click(function(){updateValueOxygen(-1);});
+    $('#oxygen-p').click(function(){updateValueOxygen(1);});
+    $('#temperature-m').click(function(){updateValueTemperature(-1);});
+    $('#temperature-p').click(function(){updateValueTemperature(1);});
 
     $('#pMc-m').click(function(){updateValue("pMc", -1);});
     $('#pMc-p').click(function(){updateValue("pMc", 1);});
@@ -61,6 +73,22 @@ function initialize()
     $('#rTitanium-m').click(function(){updateValue("rTitanium", -1);});
     $('#rTitanium-p').click(function(){updateValue("rTitanium", 1);});
     $('#rTitanium-pp').click(function(){updateValue("rTitanium", 10);});
+    $('#rForest-mm').click(function(){updateValue("rForest", -10);});
+    $('#rForest-m').click(function(){updateValue("rForest", -1);});
+    $('#rForest-p').click(function(){updateValue("rForest", 1);});
+    $('#rForest-pp').click(function(){updateValue("rForest", 10);});
+
+    $('#tile-sea1').click(function(){openTileSea('tile-sea1');});
+    $('#tile-sea2').click(function(){openTileSea('tile-sea2');});
+    $('#tile-sea3').click(function(){openTileSea('tile-sea3');});
+    $('#tile-sea4').click(function(){openTileSea('tile-sea4');});
+    $('#tile-sea5').click(function(){openTileSea('tile-sea5');});
+    $('#tile-sea6').click(function(){openTileSea('tile-sea6');});
+    $('#tile-sea7').click(function(){openTileSea('tile-sea7');});
+    $('#tile-sea8').click(function(){openTileSea('tile-sea8');});
+    $('#tile-sea9').click(function(){openTileSea('tile-sea9');});
+
+    $('#reset').click(function(){resetValues()});
 
     $('.phase0').show();
     $('.phase1').hide();
@@ -68,30 +96,103 @@ function initialize()
     $('.phase3').hide();
     $('.phase4').hide();
     $('.phase5').hide();
+    $('#phase-m').click(function(){nextCpuPhase(-1);});
+    $('#phase-p').click(function(){nextCpuPhase(1);});
     
+    /*
     $('.phase0').click(function(){nextCpuPhase();});
     $('.phase1').click(function(){nextCpuPhase();});
     $('.phase2').click(function(){nextCpuPhase();});
     $('.phase3').click(function(){nextCpuPhase();});
     $('.phase4').click(function(){nextCpuPhase();});
     $('.phase5').click(function(){nextCpuPhase();});
+    */
+};
+
+function resetValues()
+{
+    UserDatas.tr = 0;
+    UserDatas.oxygen = 0;
+    UserDatas.temperature = 0;
+    UserDatas.pMc = 0;
+    UserDatas.pCard = 0;
+    UserDatas.pHeat = 0;
+    UserDatas.pPlant = 0;    
+    UserDatas.rMc = 0;
+    UserDatas.rHeat = 0;
+    UserDatas.rPlant = 0;
+    UserDatas.rSteel = 0;
+    UserDatas.rTitanium = 0;
+    UserDatas.rForest = 0;
+    UndoDatas = [];
+    CpuPhase.current = 0;
+    CpuPhase.deck = [];
+
+    let ary = [];
+    for (let i = 0; i < 100; i++)
+    {
+        ary = shuffleArray([1, 2, 3, 4, 5]);
+        ary.unshift(0);
+        CpuPhase.deck = CpuPhase.deck.concat(ary);
+    }
+
+    //
+    updateValueOxygen(0);
+    updateValueTemperature(0);
+    updateValue("tr", 0);
+    updateValue("pMc", 0);
+    updateValue("pCard", 0);
+    updateValue("pHeat", 0);
+    updateValue("pPlant", 0);
+    updateValue("rMc", 0);
+    updateValue("rHeat", 0);
+    updateValue("rPlant", 0);
+    updateValue("rSteel", 0);
+    updateValue("rTitanium", 0);
+    updateValue("rForest", 0);
+    nextCpuPhase(0);
+
+    //
+    let tileSeaList = $('.tile-sea');
+    tileSeaList = shuffleArray(tileSeaList);
+    let tile;
+    for (let i = 0; i < tileSeaList.length; i++)
+    {
+        tile = $(tileSeaList[i]);
+        tile.removeClass('tile-sea-o');
+        tile.addClass('tile-sea-c');
+        tile.find('.tile-on').hide();
+        tile.find('.tile-off').show();
+
+        $(`#tile-sea${i}`).html($(tileSeaList[i]).html());
+    }
 };
 
 function updateValue(id, addValue)
 {
-    let v = UserDatas[id];
-    v += addValue;
-
-    if (v < 0) v = 0;
-    if (999 < v) v = 999;
-
-    if (v != UserDatas[id])
-    {
-        addUndo([{id: id, value: v - UserDatas[id]}]);
-        UserDatas[id] = v;
-        $(`#${id}-v`).text(UserDatas[id]);
-    }
+    UserDatas[id] += addValue;
+    if (UserDatas[id] < 0) UserDatas[id] = 0;
+    if (999 < UserDatas[id]) UserDatas[id] = 999;
+    $(`#${id}-v`).text(UserDatas[id]);
 };
+
+function updateValueOxygen(addValue)
+{
+    UserDatas.oxygen += addValue;
+    if (UserDatas.oxygen < 0) UserDatas.oxygen = 0;
+    if (OXYGEN_LIST.length - 1 < UserDatas.oxygen) UserDatas.oxygen = OXYGEN_LIST.length - 1;
+    $('#oxygen-v').text(`${OXYGEN_LIST[UserDatas.oxygen]} %`);
+};
+
+function updateValueTemperature(addValue)
+{
+    UserDatas.temperature += addValue;
+    if (UserDatas.temperature < 0) UserDatas.temperature = 0;
+    if (TEMPERATURE_LIST.length - 1 < UserDatas.temperature) UserDatas.temperature = TEMPERATURE_LIST.length - 1;
+    $('#temperature-v').text(`${TEMPERATURE_LIST[UserDatas.temperature]} ˚C`);
+};
+
+
 
 function generate()
 {
@@ -160,23 +261,14 @@ function addUndo(data)
 };
 
 
-function nextCpuPhase()
+function nextCpuPhase(addValue)
 {
-    if (CpuPhase.current == 0)
-    {
-        CpuPhase.deck = shuffleArray([1,2,3,4,5]);
-        CpuPhase.current = CpuPhase.deck.shift();
-    }
-    else if (0 < CpuPhase.deck.length)
-    {
-        CpuPhase.current = CpuPhase.deck.shift();
-    }
-    else
-    {
-        CpuPhase.current = 0;
-    }
-    
-    updateCpuPhase(CpuPhase.current);
+    CpuPhase.current += addValue;
+    if (CpuPhase.current < 0) CpuPhase.current = 0;
+    if (CpuPhase.deck.length - 1 < CpuPhase.current) CpuPhase.current = CpuPhase.deck.length - 1;
+
+    updateCpuPhase(CpuPhase.deck[CpuPhase.current]);
+    $('#phase-round-text').text(`Round - ${Math.floor(CpuPhase.current / 6)}`);
 };
 
 function updateCpuPhase(phase)
@@ -191,6 +283,25 @@ function updateCpuPhase(phase)
         {
             $(`.phase${i}`).hide();
         }
+    }
+};
+
+function openTileSea(id)
+{
+    let p = $(`#${id}`);
+    if (p.hasClass('tile-sea-c'))
+    {
+        p.removeClass('tile-sea-c');
+        p.addClass('tile-sea-o');
+        p.find('.tile-off').hide();
+        p.find('.tile-on').show();
+    }
+    else
+    {
+        p.removeClass('tile-sea-o');
+        p.addClass('tile-sea-c');
+        p.find('.tile-on').hide();
+        p.find('.tile-off').show();
     }
 };
 
