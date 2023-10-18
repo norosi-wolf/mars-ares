@@ -161,17 +161,22 @@ function resetValues()
 
     //
     let tileSeaList = $('.tile-sea');
-    tileSeaList = shuffleArray(tileSeaList);
-    let tile;
+    let tmpAry = [];
     for (let i = 0; i < tileSeaList.length; i++)
+    {
+        tmpAry.push($(tileSeaList[i]).html());
+    }
+    tmpAry = shuffleArray(tmpAry);
+
+    let tile;
+    for (let i = 0; i < tmpAry.length; i++)
     {
         tile = $(tileSeaList[i]);
         tile.removeClass('tile-sea-o');
         tile.addClass('tile-sea-c');
         tile.find('.tile-on').hide();
         tile.find('.tile-off').show();
-
-        $(`#tile-sea${i}`).html($(tileSeaList[i]).html());
+        $(`#tile-sea${i}`).html(tmpAry[i]);
     }
 };
 
