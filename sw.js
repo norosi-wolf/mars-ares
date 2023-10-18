@@ -18,6 +18,8 @@ var urlsToCache = [
     '/mars-ares/img/steel.png',
     '/mars-ares/img/titanium.png',
     '/mars-ares/img/tr.png',
+    '/mars-ares/img/icon_192x192.png',
+    '/mars-ares/img/icon_512x512.png',
     '/mars-ares/webfonts/fa-solid-900.ttf',
     '/mars-ares/webfonts/fa-solid-900.woff2',
     '/mars-ares/webfonts/MPLUSRounded1c-Regular.ttf',

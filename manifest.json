@@ -3,11 +3,16 @@
 	"short_name": "AEST",
 	"description": "Ares Expedition Solo Tool",
 	"icons": [
-        {
-          "src": "./img/mc.png",
-          "sizes": "259x259",
-          "type": "image/png"
-        }
+		{
+		  "src": "./img/icon_192x192.png",
+		  "sizes": "192x192",
+		  "type": "image/png"
+		},
+		{
+		  "src": "./img/icon_512x512.png",
+		  "sizes": "512x512",
+		  "type": "image/png"
+		}
     ],
 	"start_url": "./index.html",
 	"display": "standalone",
