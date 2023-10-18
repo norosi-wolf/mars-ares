@@ -16,7 +16,7 @@
         window.onload = function(){
             if ('serviceWorker' in navigator)
             {
-                navigator.serviceWorker.register('./js/sw.js').then(registration => {
+                navigator.serviceWorker.register('./sw.js').then(registration => {
                     console.log('ServiceWorker registration successful.');
                 }).catch(err => {
                     console.log('ServiceWorker registration failed.');
@@ -33,10 +33,10 @@
 
     <div class="box">
         <div class="info">
-            version: 1.0.0
+            version: 1.0.1
         </div>
     </div>
-    
+
     <!-- CPU -->
     <div class="box">
         <div class="center">
