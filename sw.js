@@ -4,6 +4,7 @@
 // キャッシュ名とキャッシュファイルの指定
 var CACHE_NAME = 'pwa-aest-caches ver1.0.0';
 var urlsToCache = [
+    '/mars-ares/',
     '/mars-ares/index.html',
     '/mars-ares/sw.js',
     '/mars-ares/manifest.json',
