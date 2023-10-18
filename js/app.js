@@ -33,7 +33,6 @@ function initialize()
 {
     resetValues();
 
-    $('#generate').click(function(){generate();});
     $('#undo').click(function(){undo();});
 
     $('#tr-m').click(function(){updateValue("tr", -1);});
@@ -88,7 +87,15 @@ function initialize()
     $('#tile-sea8').click(function(){openTileSea('tile-sea8');});
     $('#tile-sea9').click(function(){openTileSea('tile-sea9');});
 
-    $('#reset').click(function(){resetValues()});
+    $('#submitGenerate').click(function(){
+        closeModal('modal-generate');
+        generate();
+    });
+
+    $('#submitReset').click(function(){
+        closeModal('modal-reset');
+        resetValues();
+    });
 
     $('.phase0').show();
     $('.phase1').hide();
@@ -316,3 +323,15 @@ function shuffleArray(array)
     }
     return array;
 };
+
+function openModal(id)
+{
+    $(`#${id}`).show();
+    $('html').css('overflow-y', 'hidden');
+}
+
+function closeModal(id)
+{
+    $(`#${id}`).hide();
+    $('html').css('overflow-y', '');
+}
