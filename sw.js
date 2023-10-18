@@ -6,6 +6,7 @@ var CACHE_NAME = 'pwa-aest-caches ver1.0.0';
 var urlsToCache = [
     '/mars-ares/index.html',
     '/mars-ares/sw.js',
+    '/mars-ares/manifest.json',
     '/mars-ares/js/app.js',
     '/mars-ares/js/jquery-3.7.1.min.js',
     '/mars-ares/css/all.min.css',
@@ -18,6 +19,9 @@ var urlsToCache = [
     '/mars-ares/img/steel.png',
     '/mars-ares/img/titanium.png',
     '/mars-ares/img/tr.png',
+    '/mars-ares/img/oxygen.png',
+    '/mars-ares/img/temperature.png',
+    '/mars-ares/img/forest.png',
     '/mars-ares/img/icon_192x192.png',
     '/mars-ares/img/icon_512x512.png',
     '/mars-ares/webfonts/fa-solid-900.ttf',
