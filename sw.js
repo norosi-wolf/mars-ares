@@ -1,9 +1,9 @@
 
+var SW_VERSION = '1.0.7';
+
 // ServiceWorker処理：https://developers.google.com/web/fundamentals/primers/service-workers/?hl=ja
-
-
 // キャッシュ名とキャッシュファイルの指定
-var CACHE_NAME = `pwa-aest-caches ${APP_VERSION}`;
+var CACHE_NAME = `pwa-aest-caches ${SW_VERSION}`;
 var urlsToCache = [
     '/mars-ares/',
     '/mars-ares/index.html',
