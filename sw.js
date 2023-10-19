@@ -3,9 +3,8 @@
 
 
 // キャッシュ名とキャッシュファイルの指定
-const PWA_VERSION = '1.0.6';
-const CACHE_NAME = `pwa-aest-caches ${PWA_VERSION}`;
-const urlsToCache = [
+var CACHE_NAME = `pwa-aest-caches ${APP_VERSION}`;
+var urlsToCache = [
     '/mars-ares/',
     '/mars-ares/index.html',
     '/mars-ares/sw.js',
