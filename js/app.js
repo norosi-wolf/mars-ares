@@ -99,6 +99,11 @@ function initialize()
         resetValues();
     });
 
+    $('#applyClearCache').click(function(){
+        closeModal('modal-cache');
+        clearCache();
+    });
+
     $('.phase0').show();
     $('.phase1').hide();
     $('.phase2').hide();
@@ -356,4 +361,9 @@ function forbidScroll()
     $('html').addClass('no_scroll');
     $('body').addClass('no_scroll');
     scrollY = $(window).scrollTop();
+};
+
+function clearCache()
+{
+    window.location.reload(true);
 };

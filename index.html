@@ -355,7 +355,6 @@
         </div>
     </div>
     
-    <!-- Resources -->
     <div class="box">
         <div class="center">
             <div class="box-title">Tools</div>
@@ -364,6 +363,13 @@
             <div class="content-inner">
                 <div class="center">
                     <a href="javascript:openModal('modal-reset')" class="content-event-button" id="reset">Reset</a>
+                </div>
+            </div>
+        </div>
+        <div class="content-single">
+            <div class="content-inner">
+                <div class="center">
+                    <a href="javascript:openModal('modal-cache')" class="content-event-button" id="reset">Clear Cache</a>
                 </div>
             </div>
         </div>
@@ -397,6 +403,22 @@
                         <div class="center">
                             <a href="javascript:void(0)" class="content-event-button" id="submitReset">APPLY</a>
                             <a href="javascript:closeModal('modal-reset')" class="content-event-button">CANCEL</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cache" style="display: none;">
+        <div class="center">
+            <div class="modal-wrapper modal-confirm">
+                <div class="modal-title box-title">Clear Cache</div>
+                <div class="content-single">
+                    <div class="content-inner">
+                        <div class="center">
+                            <a href="javascript:void(0)" class="content-event-button" id="applyClearCache">APPLY</a>
+                            <a href="javascript:closeModal('modal-cache')" class="content-event-button">CANCEL</a>
                         </div>
                     </div>
                 </div>
