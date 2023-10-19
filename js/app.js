@@ -1,7 +1,9 @@
 
-const APP_VERSION = '1.0.7';
+const APP_VERSION = '1.0.8';
 const TEMPERATURE_LIST = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8];
 const OXYGEN_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
+var isScroll = true;
 
 var UserDatas = {
     // Board
@@ -13,6 +15,7 @@ var UserDatas = {
     pCard: 0,
     pHeat: 0,
     pPlant: 0,
+    undoDatas: [],
     // Resources
     rMc: 0,
     rHeat: 0,
@@ -20,14 +23,14 @@ var UserDatas = {
     rSteel: 0,
     rTitanium: 0,
     rForest: 0,
+    // CPU
+    cpuPhase: {
+        current: 0,
+        deck: [],
+    },
 };
 
-var UndoDatas = [];
 
-var CpuPhase = {
-    current: 0,
-    deck: [],
-};
 
 function initialize()
 {
@@ -112,6 +115,12 @@ function initialize()
     $('.phase5').hide();
     $('#phase-m').click(function(){nextCpuPhase(-1);});
     $('#phase-p').click(function(){nextCpuPhase(1);});
+
+    window.addEventListener("scroll", (e) => {
+        if (isScroll) return;
+        e.preventDefault();
+        window.scrollTo(0, 0);
+    });
     
     /*
     $('.phase0').click(function(){nextCpuPhase();});
@@ -138,16 +147,16 @@ function resetValues()
     UserDatas.rSteel = 0;
     UserDatas.rTitanium = 0;
     UserDatas.rForest = 0;
-    UndoDatas = [];
-    CpuPhase.current = 0;
-    CpuPhase.deck = [];
+    UserDatas.undoDatas = [];
+    UserDatas.cpuPhase.current = 0;
+    UserDatas.cpuPhase.deck = [];
 
     let ary = [];
     for (let i = 0; i < 100; i++)
     {
         ary = shuffleArray([1, 2, 3, 4, 5]);
         ary.unshift(0);
-        CpuPhase.deck = CpuPhase.deck.concat(ary);
+        UserDatas.cpuPhase.deck = UserDatas.cpuPhase.deck.concat(ary);
     }
 
     //
@@ -255,9 +264,9 @@ function generate()
 
 function undo()
 {
-    if (0 < UndoDatas.length)
+    if (0 < UserDatas.undoDatas.length)
     {
-        let undoData = UndoDatas.shift();
+        let undoData = UserDatas.undoDatas.shift();
         let id, value;
         for (let i = 0; i < undoData.length; i++)
         {
@@ -271,22 +280,28 @@ function undo()
 
 function addUndo(data)
 {
-    UndoDatas.unshift(data);
-    if (10 < UndoDatas.length)
+    UserDatas.undoDatas.unshift(data);
+    if (10 < UserDatas.undoDatas.length)
     {
-        UndoDatas.pop();
+        UserDatas.undoDatas.pop();
     }
 };
 
 
 function nextCpuPhase(addValue)
 {
-    CpuPhase.current += addValue;
-    if (CpuPhase.current < 0) CpuPhase.current = 0;
-    if (CpuPhase.deck.length - 1 < CpuPhase.current) CpuPhase.current = CpuPhase.deck.length - 1;
+    UserDatas.cpuPhase.current += addValue;
+    if (UserDatas.cpuPhase.current < 0)
+    {
+        UserDatas.cpuPhase.current = 0;
+    }
+    if (UserDatas.cpuPhase.deck.length - 1 < UserDatas.cpuPhase.current)
+    {
+        UserDatas.cpuPhase.current = UserDatas.cpuPhase.deck.length - 1;
+    }
 
-    updateCpuPhase(CpuPhase.deck[CpuPhase.current]);
-    $('#phase-round-text').text(`Round - ${Math.floor(CpuPhase.current / 6)}`);
+    updateCpuPhase(UserDatas.cpuPhase.deck[UserDatas.cpuPhase.current]);
+    $('#phase-round-text').text(`Round - ${Math.floor(UserDatas.cpuPhase.current / 6)}`);
 };
 
 function updateCpuPhase(phase)
@@ -351,16 +366,18 @@ function closeModal(id)
 var scrollY;
 function allowScroll()
 {
-    $('html').removeClass('no_scroll');
-    $('body').removeClass('no_scroll');
-    $(window).scrollTop(scrollY);
+    isScroll = true;
+    //$('html').removeClass('no_scroll');
+    //$('body').removeClass('no_scroll');
+    //$(window).scrollTop(scrollY);
 };
 
 function forbidScroll()
 {
-    $('html').addClass('no_scroll');
-    $('body').addClass('no_scroll');
-    scrollY = $(window).scrollTop();
+    isScroll = false;
+    //$('html').addClass('no_scroll');
+    //$('body').addClass('no_scroll');
+    //scrollY = $(window).scrollTop();
 };
 
 function clearCache()
