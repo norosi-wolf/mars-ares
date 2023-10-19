@@ -1,5 +1,5 @@
 
-const APP_VERSION = '1.0.12';
+const APP_VERSION = '1.0.13';
 const TEMPERATURE_LIST = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8];
 const OXYGEN_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
@@ -31,24 +31,111 @@ var UserDatas = {
     },
 };
 
-
-
+/**
+ * 
+ */
 function initialize()
 {
     $('#info-version').text(`verson: ${APP_VERSION}`);
-
     resetValues();
+    registerEvent();
+};
 
-    $('#undo').click(function(){undo();});
+/**
+ * 
+ */
+function resetValues()
+{
+    UserDatas.tr = 0;
+    UserDatas.oxygen = 0;
+    UserDatas.temperature = 0;
+    UserDatas.pMc = 0;
+    UserDatas.pCard = 0;
+    UserDatas.pHeat = 0;
+    UserDatas.pPlant = 0;    
+    UserDatas.rMc = 0;
+    UserDatas.rHeat = 0;
+    UserDatas.rPlant = 0;
+    UserDatas.rSteel = 0;
+    UserDatas.rTitanium = 0;
+    UserDatas.rForest = 0;
+    UserDatas.undoDatas = [];
+    UserDatas.cpuPhase.current = 0;
+    UserDatas.cpuPhase.deck = [];
+
+    shuffleCpuDeck();
+    updateValueOxygen(0);
+    updateValueTemperature(0);
+    updateValue("tr", 0);
+    updateValue("pMc", 0);
+    updateValue("pCard", 0);
+    updateValue("pHeat", 0);
+    updateValue("pPlant", 0);
+    updateValue("rMc", 0);
+    updateValue("rHeat", 0);
+    updateValue("rPlant", 0);
+    updateValue("rSteel", 0);
+    updateValue("rTitanium", 0);
+    updateValue("rForest", 0);
+    nextCpuPhase(0);
+    shuffleTileSea();
+};
+
+/**
+ * 
+ */
+function shuffleCpuDeck()
+{
+    let ary = [];
+    for (let i = 0; i < 100; i++)
+    {
+        ary = shuffleArray([1, 2, 3, 4, 5]);
+        ary.unshift(0);
+        UserDatas.cpuPhase.deck = UserDatas.cpuPhase.deck.concat(ary);
+    }
+};
+
+/**
+ * 
+ */
+function shuffleTileSea()
+{
+    let tileSeaList = $('.tile-sea');
+    let tmpAry = [];
+    let i = 0;
+    for (i = 0; i < tileSeaList.length; i++)
+    {
+        if ($(tileSeaList[i]).hasClass('tile-sea-o')) $(tileSeaList[i]).removeClass('tile-sea-o');
+        if ($(tileSeaList[i]).hasClass('tile-sea-c') == false) $(tileSeaList[i]).addClass('tile-sea-c');
+        $(tileSeaList[i]).find('.tile-on').hide();
+        $(tileSeaList[i]).find('.tile-off').show();
+        tmpAry.push($(tileSeaList[i]).html());
+    }
+
+    tmpAry = shuffleArray(tmpAry);
+    for (i = 0; i < tmpAry.length; i++)
+    {
+        $(`#tile-sea${i+1}`).html(tmpAry[i]);
+    }
+};
+
+/**
+ * 
+ */
+function registerEvent()
+{
+    window.addEventListener('touchmove', (e) => {
+        if (isScroll) return;
+        e.preventDefault();
+        window.scrollTo(0, scrollY);
+    }, {passive:false});
 
     $('#tr-m').click(function(){updateValue("tr", -1);});
     $('#tr-p').click(function(){updateValue("tr", 1);});
-
     $('#oxygen-m').click(function(){updateValueOxygen(-1);});
     $('#oxygen-p').click(function(){updateValueOxygen(1);});
     $('#temperature-m').click(function(){updateValueTemperature(-1);});
     $('#temperature-p').click(function(){updateValueTemperature(1);});
-
     $('#pMc-m').click(function(){updateValue("pMc", -1);});
     $('#pMc-p').click(function(){updateValue("pMc", 1);});
     $('#pCard-m').click(function(){updateValue("pCard", -1);});
@@ -57,7 +144,6 @@ function initialize()
     $('#pHeat-p').click(function(){updateValue("pHeat", 1);});
     $('#pPlant-m').click(function(){updateValue("pPlant", -1);});
     $('#pPlant-p').click(function(){updateValue("pPlant", 1);});
-
     $('#rMc-mm').click(function(){updateValue("rMc", -10);});
     $('#rMc-m').click(function(){updateValue("rMc", -1);});
     $('#rMc-p').click(function(){updateValue("rMc", 1);});
@@ -82,7 +168,6 @@ function initialize()
     $('#rForest-m').click(function(){updateValue("rForest", -1);});
     $('#rForest-p').click(function(){updateValue("rForest", 1);});
     $('#rForest-pp').click(function(){updateValue("rForest", 10);});
-
     $('#tile-sea1').click(function(){openTileSea('tile-sea1');});
     $('#tile-sea2').click(function(){openTileSea('tile-sea2');});
     $('#tile-sea3').click(function(){openTileSea('tile-sea3');});
@@ -92,110 +177,26 @@ function initialize()
     $('#tile-sea7').click(function(){openTileSea('tile-sea7');});
     $('#tile-sea8').click(function(){openTileSea('tile-sea8');});
     $('#tile-sea9').click(function(){openTileSea('tile-sea9');});
+    $('#phase-m').click(function(){nextCpuPhase(-1);});
+    $('#phase-p').click(function(){nextCpuPhase(1);});
 
     $('#submitGenerate').click(function(){
         closeModal('modal-generate');
         generate();
     });
-
     $('#submitReset').click(function(){
         closeModal('modal-reset');
         resetValues();
     });
-
     $('#applyClearCache').click(function(){
         closeModal('modal-cache');
         clearCache();
     });
-
-    $('.phase0').show();
-    $('.phase1').hide();
-    $('.phase2').hide();
-    $('.phase3').hide();
-    $('.phase4').hide();
-    $('.phase5').hide();
-    $('#phase-m').click(function(){nextCpuPhase(-1);});
-    $('#phase-p').click(function(){nextCpuPhase(1);});
-
-    window.addEventListener('touchmove', (e) => {
-        if (isScroll) return;
-        e.preventDefault();
-        window.scrollTo(0, scrollY);
-    }, {passive:false});
-    
-    /*
-    $('.phase0').click(function(){nextCpuPhase();});
-    $('.phase1').click(function(){nextCpuPhase();});
-    $('.phase2').click(function(){nextCpuPhase();});
-    $('.phase3').click(function(){nextCpuPhase();});
-    $('.phase4').click(function(){nextCpuPhase();});
-    $('.phase5').click(function(){nextCpuPhase();});
-    */
 };
 
-function resetValues()
-{
-    UserDatas.tr = 0;
-    UserDatas.oxygen = 0;
-    UserDatas.temperature = 0;
-    UserDatas.pMc = 0;
-    UserDatas.pCard = 0;
-    UserDatas.pHeat = 0;
-    UserDatas.pPlant = 0;    
-    UserDatas.rMc = 0;
-    UserDatas.rHeat = 0;
-    UserDatas.rPlant = 0;
-    UserDatas.rSteel = 0;
-    UserDatas.rTitanium = 0;
-    UserDatas.rForest = 0;
-    UserDatas.undoDatas = [];
-    UserDatas.cpuPhase.current = 0;
-    UserDatas.cpuPhase.deck = [];
-
-    let ary = [];
-    for (let i = 0; i < 100; i++)
-    {
-        ary = shuffleArray([1, 2, 3, 4, 5]);
-        ary.unshift(0);
-        UserDatas.cpuPhase.deck = UserDatas.cpuPhase.deck.concat(ary);
-    }
-
-    //
-    updateValueOxygen(0);
-    updateValueTemperature(0);
-    updateValue("tr", 0);
-    updateValue("pMc", 0);
-    updateValue("pCard", 0);
-    updateValue("pHeat", 0);
-    updateValue("pPlant", 0);
-    updateValue("rMc", 0);
-    updateValue("rHeat", 0);
-    updateValue("rPlant", 0);
-    updateValue("rSteel", 0);
-    updateValue("rTitanium", 0);
-    updateValue("rForest", 0);
-    nextCpuPhase(0);
-
-    //
-    let tileSeaList = $('.tile-sea');
-    let tmpAry = [];
-    let i = 0;
-    for (i = 0; i < tileSeaList.length; i++)
-    {
-        if ($(tileSeaList[i]).hasClass('tile-sea-o')) $(tileSeaList[i]).removeClass('tile-sea-o');
-        if ($(tileSeaList[i]).hasClass('tile-sea-c') == false) $(tileSeaList[i]).addClass('tile-sea-c');
-        $(tileSeaList[i]).find('.tile-on').hide();
-        $(tileSeaList[i]).find('.tile-off').show();
-        tmpAry.push($(tileSeaList[i]).html());
-    }
-
-    tmpAry = shuffleArray(tmpAry);
-    for (i = 0; i < tmpAry.length; i++)
-    {
-        $(`#tile-sea${i+1}`).html(tmpAry[i]);
-    }
-};
-
+/**
+ * 
+ */
 function updateValue(id, addValue)
 {
     UserDatas[id] += addValue;
@@ -204,6 +205,9 @@ function updateValue(id, addValue)
     $(`#${id}-v`).text(UserDatas[id]);
 };
 
+/**
+ * 
+ */
 function updateValueOxygen(addValue)
 {
     UserDatas.oxygen += addValue;
@@ -212,6 +216,9 @@ function updateValueOxygen(addValue)
     $('#oxygen-v').text(`${OXYGEN_LIST[UserDatas.oxygen]} %`);
 };
 
+/**
+ * 
+ */
 function updateValueTemperature(addValue)
 {
     UserDatas.temperature += addValue;
@@ -220,8 +227,9 @@ function updateValueTemperature(addValue)
     $('#temperature-v').text(`${TEMPERATURE_LIST[UserDatas.temperature]} ˚C`);
 };
 
-
-
+/**
+ * 
+ */
 function generate()
 {
     let v;
@@ -263,6 +271,9 @@ function generate()
     addUndo(undoData);
 };
 
+/**
+ * 
+ */
 function undo()
 {
     if (0 < UserDatas.undoDatas.length)
@@ -279,6 +290,9 @@ function undo()
     }
 };
 
+/**
+ * 
+ */
 function addUndo(data)
 {
     UserDatas.undoDatas.unshift(data);
@@ -288,7 +302,9 @@ function addUndo(data)
     }
 };
 
-
+/**
+ * 
+ */
 function nextCpuPhase(addValue)
 {
     UserDatas.cpuPhase.current += addValue;
@@ -305,6 +321,9 @@ function nextCpuPhase(addValue)
     $('#phase-round-text').text(`Round - ${Math.floor(UserDatas.cpuPhase.current / 6)}`);
 };
 
+/**
+ * 
+ */
 function updateCpuPhase(phase)
 {
     for (let i = 0; i <= 5; i++)
@@ -320,6 +339,9 @@ function updateCpuPhase(phase)
     }
 };
 
+/**
+ * 
+ */
 function openTileSea(id)
 {
     let p = $(`#${id}`);
@@ -339,6 +361,9 @@ function openTileSea(id)
     }
 };
 
+/**
+ * 
+ */
 function shuffleArray(array)
 {
     let k;
@@ -350,6 +375,9 @@ function shuffleArray(array)
     return array;
 };
 
+/**
+ * 
+ */
 function openModal(id)
 {
     $(`#${id}`).show();
@@ -357,6 +385,9 @@ function openModal(id)
     forbidScroll();
 };
 
+/**
+ * 
+ */
 function closeModal(id)
 {
     $(`#${id}`).hide();
@@ -364,7 +395,9 @@ function closeModal(id)
     allowScroll();
 };
 
-var scrollY;
+/**
+ * 
+ */
 function allowScroll()
 {
     isScroll = true;
@@ -373,6 +406,9 @@ function allowScroll()
     $(window).scrollTop(scrollY);
 };
 
+/**
+ * 
+ */
 function forbidScroll()
 {
     isScroll = false;
@@ -381,6 +417,9 @@ function forbidScroll()
     $('body').addClass('no_scroll');
 };
 
+/**
+ * 
+ */
 function clearCache()
 {
     window.location.reload(true);
