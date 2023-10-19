@@ -1,5 +1,5 @@
 
-var SW_VERSION = '1.0.9';
+var SW_VERSION = '1.0.11';
 
 // ServiceWorker処理：https://developers.google.com/web/fundamentals/primers/service-workers/?hl=ja
 // キャッシュ名とキャッシュファイルの指定
@@ -11,6 +11,7 @@ var urlsToCache = [
     '/mars-ares/manifest.json',
     '/mars-ares/js/app.js',
     '/mars-ares/js/jquery-3.7.1.min.js',
+    '/mars-ares/js/inobounce.min.js',
     '/mars-ares/css/all.min.css',
     '/mars-ares/css/sanitize.css',
     '/mars-ares/css/style.css',

@@ -121,7 +121,14 @@ function initialize()
         if (isScroll) return;
         e.preventDefault();
         window.scrollTo(0, scrollY);
-    });
+    }, {passive:false});
+    /*
+    window.addEventListener('scroll', (e) => {
+        if (isScroll) return;
+        e.preventDefault();
+        window.scrollTo(0, scrollY);
+    }, {passive:false});
+    */
 
     iNoBounce.enable();
     
@@ -370,17 +377,17 @@ var scrollY;
 function allowScroll()
 {
     isScroll = true;
-    //$('html').removeClass('no_scroll');
-    //$('body').removeClass('no_scroll');
-    //$(window).scrollTop(scrollY);
+    $('html').removeClass('no_scroll');
+    $('body').removeClass('no_scroll');
+    $(window).scrollTop(scrollY);
 };
 
 function forbidScroll()
 {
     isScroll = false;
     scrollY = $(window).scrollTop();
-    //$('html').addClass('no_scroll');
-    //$('body').addClass('no_scroll');
+    $('html').addClass('no_scroll');
+    $('body').addClass('no_scroll');
 };
 
 function clearCache()
