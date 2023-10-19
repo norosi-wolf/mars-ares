@@ -331,10 +331,27 @@ function openModal(id)
 {
     $(`#${id}`).show();
     $('html').css('overflow-y', 'hidden');
-}
+    forbidScroll();
+};
 
 function closeModal(id)
 {
     $(`#${id}`).hide();
     $('html').css('overflow-y', '');
-}
+    allowScroll();
+};
+
+var scrollY;
+function allowScroll()
+{
+    $('html').removeClass('no_scroll');
+    $('body').removeClass('no_scroll');
+    $(window).scrollTop(scrollY);
+};
+
+function forbidScroll()
+{
+    $('html').addClass('no_scroll');
+    $('body').addClass('no_scroll');
+    scrollY = $(window).scrollTop();
+};
