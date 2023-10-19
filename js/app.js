@@ -1,9 +1,10 @@
 
-const APP_VERSION = '1.0.8';
+const APP_VERSION = '1.0.9';
 const TEMPERATURE_LIST = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8];
 const OXYGEN_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 var isScroll = true;
+var scrollY;
 
 var UserDatas = {
     // Board
@@ -116,10 +117,10 @@ function initialize()
     $('#phase-m').click(function(){nextCpuPhase(-1);});
     $('#phase-p').click(function(){nextCpuPhase(1);});
 
-    window.addEventListener("scroll", (e) => {
+    window.addEventListener('touchmove', (e) => {
         if (isScroll) return;
         e.preventDefault();
-        window.scrollTo(0, 0);
+        window.scrollTo(0, scrollY);
     });
     
     /*
@@ -375,9 +376,9 @@ function allowScroll()
 function forbidScroll()
 {
     isScroll = false;
+    scrollY = $(window).scrollTop();
     //$('html').addClass('no_scroll');
     //$('body').addClass('no_scroll');
-    //scrollY = $(window).scrollTop();
 };
 
 function clearCache()
