@@ -2,7 +2,7 @@
 const APP_VERSION = '1.0.14';
 const TEMPERATURE_LIST = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8];
 const OXYGEN_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-const PARTITION_COLOR_LIST = ['#8A2BE2  ', '#DC143C', '#ffff00', '#FFFFFF']
+const PARTITION_COLOR_LIST = ['#8A2BE2', '#DC143C', '#ffff00', '#FFFFFF']
 const TEMPERATURE_PARTITION_LIST = [0, 6, 11, 16];
 const OXYGEN_PARTITION_LIST = [0, 3, 7, 12];
 
@@ -330,6 +330,8 @@ function addUndo(data)
  */
 function nextCpuPhase(addValue)
 {
+    let currentRound = Math.floor(UserDatas.cpuPhase.current / 6);
+
     UserDatas.cpuPhase.current += addValue;
     if (UserDatas.cpuPhase.current < 0)
     {
@@ -340,8 +342,15 @@ function nextCpuPhase(addValue)
         UserDatas.cpuPhase.current = UserDatas.cpuPhase.deck.length - 1;
     }
 
+    let nextRound = Math.floor(UserDatas.cpuPhase.current / 6);
+
+    if (currentRound < nextRound)
+    {
+        openModal('modal-round');
+        $('#phase-round-text').text(`Round - ${nextRound}`);
+    }
+
     updateCpuPhase(UserDatas.cpuPhase.deck[UserDatas.cpuPhase.current]);
-    $('#phase-round-text').text(`Round - ${Math.floor(UserDatas.cpuPhase.current / 6)}`);
 };
 
 /**
