@@ -242,7 +242,8 @@ main {
 }
 
 .content-single .content-text-num-long {
-    width: 30vw;
+    font-size: 10vw;
+    width: 38vw;
 }
 
 .content-single .icon {

@@ -1,5 +1,5 @@
 
-var SW_VERSION = '1.0.15';
+var SW_VERSION = '1.0.16';
 
 // ServiceWorker処理：https://developers.google.com/web/fundamentals/primers/service-workers/?hl=ja
 // キャッシュ名とキャッシュファイルの指定
