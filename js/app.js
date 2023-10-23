@@ -1,7 +1,10 @@
 
-const APP_VERSION = '1.0.13';
+const APP_VERSION = '1.0.14';
 const TEMPERATURE_LIST = [-30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8];
 const OXYGEN_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+const PARTITION_COLOR_LIST = ['#8A2BE2  ', '#DC143C', '#ffff00', '#FFFFFF']
+const TEMPERATURE_PARTITION_LIST = [0, 6, 11, 16];
+const OXYGEN_PARTITION_LIST = [0, 3, 7, 12];
 
 var isScroll = true;
 var scrollY;
@@ -214,6 +217,16 @@ function updateValueOxygen(addValue)
     if (UserDatas.oxygen < 0) UserDatas.oxygen = 0;
     if (OXYGEN_LIST.length - 1 < UserDatas.oxygen) UserDatas.oxygen = OXYGEN_LIST.length - 1;
     $('#oxygen-v').text(`${OXYGEN_LIST[UserDatas.oxygen]} %`);
+    
+    let color = PARTITION_COLOR_LIST[0];
+    for (let i = 0; i < OXYGEN_PARTITION_LIST.length; i++)
+    {
+        if (OXYGEN_PARTITION_LIST[i] <= UserDatas.oxygen)
+        {
+            color = PARTITION_COLOR_LIST[i];
+        }
+    }
+    $('#oxygen-v').css({'color': color});
 };
 
 /**
@@ -225,6 +238,16 @@ function updateValueTemperature(addValue)
     if (UserDatas.temperature < 0) UserDatas.temperature = 0;
     if (TEMPERATURE_LIST.length - 1 < UserDatas.temperature) UserDatas.temperature = TEMPERATURE_LIST.length - 1;
     $('#temperature-v').text(`${TEMPERATURE_LIST[UserDatas.temperature]} ˚C`);
+
+    let color = PARTITION_COLOR_LIST[0];
+    for (let i = 0; i < TEMPERATURE_PARTITION_LIST.length; i++)
+    {
+        if (TEMPERATURE_PARTITION_LIST[i] <= UserDatas.temperature)
+        {
+            color = PARTITION_COLOR_LIST[i];
+        }
+    }
+    $('#temperature-v').css({'color': color});
 };
 
 /**

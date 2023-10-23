@@ -364,10 +364,20 @@ main {
     font-weight: bold;
 }
 
-.info {
-    font-size: 3vw;
+.box-info {
+    margin-bottom: 0vw;
 }
 
+.info {
+    font-size: 2vw;
+    margin-bottom: 0vw;
+    padding: 0vw;
+}
+
+#oxygen-v, #temperature-v{
+    -webkit-text-stroke-width: 0.2vw;
+    -webkit-text-stroke-color: black;
+}
 
 
 
